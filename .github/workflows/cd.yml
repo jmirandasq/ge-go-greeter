@@ -15,7 +15,7 @@ jobs:
       - name: Checkout infra repo
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.repository_owner }}/go-app-infra
+          repository: ${{ github.repository_owner }}/ge-infra-greeter
           token: ${{ secrets.INFRA_REPO_TOKEN }}
 
       - name: Update image tag
