@@ -6,10 +6,6 @@ on:
     branches: [main]
     types: [completed]
   workflow_dispatch:
-    inputs:
-      image_tag:
-        description: 'Tag de la imagen a desplegar (ej: sha-a1b2c3d)'
-        required: true
 
 jobs:
   deploy:
@@ -23,16 +19,7 @@ jobs:
           repository: ${{ github.repository_owner }}/ge-infra-greeter
           token: ${{ secrets.INFRA_REPO_TOKEN }}
 
-      - name: Resolve image tag
-        id: tag
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "value=${{ github.event.inputs.image_tag }}" >> $GITHUB_OUTPUT
-          else
-            echo "value=sha-$(echo ${{ github.event.workflow_run.head_sha }} | cut -c1-7)" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Update image tag
+      - name: Update canary image
         run: |
           IMAGE_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
           sed -i "s|image: ghcr.io/.*:.*|image: ghcr.io/${{ github.repository_owner }}/${IMAGE_NAME}:canary|" k8s/deployment-canary.yaml
@@ -42,5 +29,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add k8s/deployment-canary.yaml
-          git commit -m "chore: update canary image to ${{ steps.tag.outputs.value }}"
+          git commit -m "chore: update canary deployment to latest canary image"
           git push
