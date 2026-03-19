@@ -13,6 +13,6 @@ func NewGreeterUseCase() *GreeterUseCase {
 
 func (uc *GreeterUseCase) Greet(req domain.GreetRequest) domain.GreetResponse {
 	return domain.GreetResponse{
-		Message: fmt.Sprintf("Hola, %s", req.Name),
+		Message: fmt.Sprintf("¡Hola, %s! (v2)", req.Name),
 	}
 }
