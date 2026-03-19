@@ -16,12 +16,12 @@ func TestGreet(t *testing.T) {
 		{
 			name:     "saluda con nombre simple",
 			input:    domain.GreetRequest{Name: "Juan"},
-			expected: "Hola, Juan",
+			expected: "¡Hola, Juan! (v2)",
 		},
 		{
 			name:     "saluda con nombre compuesto",
 			input:    domain.GreetRequest{Name: "Maria Jose"},
-			expected: "Hola, Maria Jose",
+			expected: "¡Hola, Maria Jose! (v2)",
 		},
 	}
 
