@@ -33,5 +33,9 @@ func main() {
 
 	router.POST("/greet", handler.Greet)
 
+	router.GET("/test-401", func(c *gin.Context) {
+		c.JSON(401, gin.H{"error": "Unauthorized"})
+	})
+
 	router.Run()
 }
