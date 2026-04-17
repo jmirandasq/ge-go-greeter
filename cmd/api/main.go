@@ -38,7 +38,7 @@ func main() {
 	})
 
 	router.GET("/test-error", func(c *gin.Context) {
-		log.Println("ERROR: fallo critico en la aplicacion")
+		log.Println("ERROR: fallo critico en la aplicacion.")
 		c.JSON(500, gin.H{"error": "Internal Server Error"})
 	})
 
